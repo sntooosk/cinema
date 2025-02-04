@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Filme</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .classificacao {
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 5px;
+    }
+     .classificacao.c-L {
+            background: #00b168;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .classificacao.c-10 {
+            background: #25c3fe;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .classificacao.c-12 {
+            background: #ffd126;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        .classificacao.c-14 {
+            background: #fe7725;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .classificacao.c-16 {
+            background: #ff3838;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .classificacao.c-18 {
+            background: #3e3e3e;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .classificacao.c-N {
+            background: #a5a2a2;
+            padding: 4px 9px;
+            border-radius: 5px;
+            color: black;
+        }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+<div th:replace="~{navbar.html :: navbar}"></div>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4" th:text="${filme.titulo}"></h2>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img th:src="@{/filmes/capa/{id}(id=${filme.id})}" class="card-img-top" alt="Capa do filme">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${filme.titulo}"></h5>
+          <p><strong>Diretor:</strong> <span th:text="${filme.diretor}"></span></p>
+          <p><strong>Gênero:</strong> <span th:text="${filme.genero}"></span></p>
+          <p><strong>Duração:</strong> <span th:text="${filme.duracao}"></span> minutos</p>
+          <p><strong>Classificação:</strong>
+            <span th:class="'classificacao c-' + ${filme.classificacao}" th:text="${filme.classificacao}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="video-container mb-4">
+        <iframe th:src="@{'https://www.youtube.com/embed/' + ${filme.thriller}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p th:text="${filme.sinopse}"></p>
+
+      <h4>Sessões Disponíveis</h4>
+      <div class="row">
+        <div class="col-md-4 mb-3" th:each="sessao : ${sessoes}">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title" th:text="${#temporals.format(sessao.horario, 'dd/MM/yyyy HH:mm')}"></h5>
+              <p><strong>Sala:</strong> <span th:text="${sessao.sala}"></span></p>
+              <p><strong>Preço:</strong> <span th:text="${sessao.precoIngresso}"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="/home" class="btn btn-secondary w-100">Voltar para a lista</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

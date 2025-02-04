@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Novo Filme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{navbar.html :: navbar}"></div>
+
+<div class="container">
+    <h2>Criar Novo Filme</h2>
+    <form action="/filmes/novo" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" id="titulo" name="titulo" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="sinopse" class="form-label">Sinopse</label>
+            <textarea id="sinopse" name="sinopse" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="diretor" class="form-label">Diretor</label>
+            <input type="text" id="diretor" name="diretor" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="genero" class="form-label">Gênero</label>
+            <input type="text" id="genero" name="genero" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="duracao" class="form-label">Duração (minutos)</label>
+            <input type="number" id="duracao" name="duracao" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="classificacao" class="form-label">Classificação</label>
+            <input type="text" id="classificacao" name="classificacao" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="thriller" class="form-label">thriller</label>
+            <input type="text" id="thriller" name="thriller" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="capa" class="form-label">Capa</label>
+            <input type="file" id="capa" name="capa" class="form-control" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Filme</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
