@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/sessoes")
@@ -22,39 +24,41 @@ public class SessaoController {
     private FilmeService filmeService;
 
     @GetMapping("/nova")
-    public String showCreateSessaoPage(Model model) {
-        model.addAttribute("filmes", filmeService.listarFilmes());
-        return "nova-sessao";
+    public String pageNewSessao(Model model) {
+        model.addAttribute("filmes", filmeService.getAllFilme());
+        return "sessao/nova-sessao";
     }
 
     @PostMapping("/nova")
     public String createSessao(SessaoDTO sessaoDTO) {
-        sessaoService.salvarSessao(sessaoDTO);
+        sessaoService.createSessao(sessaoDTO);
         return "redirect:/sessoes/listar";
     }
 
     @GetMapping("/listar")
     public String listSessoes(Model model) {
-        List<Sessao> sessoes = sessaoService.listarSessoes();
-        model.addAttribute("sessoes", sessoes);
-        return "listar-sessoes";
+        List<Sessao> sessoes = sessaoService.getAllSessao();
+        Map<String, List<Sessao>> sessoesGroup = sessoes.stream()
+                .collect(Collectors.groupingBy(sessao -> sessao.getFilme().getTitulo()));
+        model.addAttribute("sessoesAgrupadas", sessoesGroup);
+        return "sessao/listar-sessoes";
     }
 
     @GetMapping("/editar/{id}")
-    public String showEditSessaoPage(@PathVariable Long id, Model model) {
-        sessaoService.obterSessao(id).ifPresent(sessao -> model.addAttribute("sessao", sessao));
-        return "editar-sessao";
+    public String pageEditSessao(@PathVariable Long id, Model model) {
+        sessaoService.getByIdSessao(id).ifPresent(sessao -> model.addAttribute("sessao", sessao));
+        return "sessao/editar-sessao";
     }
 
     @PostMapping("/editar")
     public String updateSessao(SessaoDTO sessaoDTO) {
-        sessaoService.atualizarSessao(sessaoDTO);
+        sessaoService.updateSessao(sessaoDTO);
         return "redirect:/sessoes/listar";
     }
 
     @GetMapping("/excluir/{id}")
     public String deleteSessao(@PathVariable Long id) {
-        sessaoService.excluirSessao(id);
+        sessaoService.deleteSessao(id);
         return "redirect:/sessoes/listar";
     }
 }

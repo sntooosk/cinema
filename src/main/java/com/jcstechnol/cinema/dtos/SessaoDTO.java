@@ -8,7 +8,6 @@ public class SessaoDTO {
     private Long filmeId;
     private LocalDateTime horario;
     private String sala;
-    private Double precoIngresso;
 
     public Long getId() {
         return id;
@@ -42,11 +41,4 @@ public class SessaoDTO {
         this.sala = sala;
     }
 
-    public Double getPrecoIngresso() {
-        return precoIngresso;
-    }
-
-    public void setPrecoIngresso(Double precoIngresso) {
-        this.precoIngresso = precoIngresso;
-    }
 }

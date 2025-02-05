@@ -22,44 +22,44 @@ public class FilmeController {
     private FilmeService filmeService;
 
     @GetMapping("/novo")
-    public String showCreateFilmePage() {
-        return "novo-filme";
+    public String pageNewFilme() {
+        return "filme/novo-filme";
     }
 
     @PostMapping("/novo")
     public String createFilme(FilmeDTO filmeDTO, @RequestParam("capa") MultipartFile capaFile) throws IOException {
-        filmeService.salvarFilme(filmeDTO, capaFile);
+        filmeService.createFilme(filmeDTO, capaFile);
         return "redirect:/filmes/listar";
     }
 
     @GetMapping("/listar")
     public String listFilmes(Model model) {
-        model.addAttribute("filmes", filmeService.listarFilmes());
-        return "listar-filmes";
+        model.addAttribute("filmes", filmeService.getAllFilme());
+        return "filme/listar-filmes";
     }
 
     @GetMapping("/editar/{id}")
-    public String showEditFilmePage(@PathVariable Long id, Model model) {
-        filmeService.obterFilme(id).ifPresent(filme -> model.addAttribute("filme", filme));
-        return "editar-filme";
+    public String pageEditFilme(@PathVariable Long id, Model model) {
+        filmeService.getByIdFilme(id).ifPresent(filme -> model.addAttribute("filme", filme));
+        return "filme/editar-filme";
     }
 
     @PostMapping("/editar")
     public String updateFilme(FilmeDTO filmeDTO, @RequestParam(value = "capa", required = false) MultipartFile capaFile) throws IOException {
-        filmeService.atualizarFilme(filmeDTO, capaFile);
+        filmeService.updateFilme(filmeDTO, capaFile);
         return "redirect:/filmes/listar";
     }
 
     @GetMapping("/excluir/{id}")
     public String deleteFilme(@PathVariable Long id) {
-        filmeService.excluirFilme(id);
+        filmeService.deleteFilme(id);
         return "redirect:/filmes/listar";
     }
 
     @GetMapping("/capa/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getCapa(@PathVariable Long id) {
-        return filmeService.obterFilme(id)
+        return filmeService.getByIdFilme(id)
                 .filter(filme -> filme.getCapa() != null)
                 .map(filme -> ResponseEntity.ok()
                         .contentType(MediaType.IMAGE_JPEG)

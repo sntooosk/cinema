@@ -17,7 +17,7 @@ public class FilmeService {
     @Autowired
     private FilmeRepository filmeRepository;
 
-    public void salvarFilme(FilmeDTO filmeDTO, MultipartFile capaFile) throws IOException {
+    public void createFilme(FilmeDTO filmeDTO, MultipartFile capaFile) throws IOException {
         Filme filme = new Filme();
         filme.setTitulo(filmeDTO.getTitulo());
         filme.setSinopse(filmeDTO.getSinopse());
@@ -34,15 +34,15 @@ public class FilmeService {
         filmeRepository.save(filme);
     }
 
-    public List<Filme> listarFilmes() {
+    public List<Filme> getAllFilme() {
         return filmeRepository.findAll();
     }
 
-    public Optional<Filme> obterFilme(Long id) {
+    public Optional<Filme> getByIdFilme(Long id) {
         return filmeRepository.findById(id);
     }
 
-    public void atualizarFilme(FilmeDTO filmeDTO, MultipartFile capaFile) throws IOException {
+    public void updateFilme(FilmeDTO filmeDTO, MultipartFile capaFile) throws IOException {
         Optional<Filme> filmeOpt = filmeRepository.findById(filmeDTO.getId());
         if (filmeOpt.isPresent()) {
             Filme filme = filmeOpt.get();
@@ -62,7 +62,7 @@ public class FilmeService {
         }
     }
 
-    public void excluirFilme(Long id) {
+    public void deleteFilme(Long id) {
         filmeRepository.deleteById(id);
     }
 }

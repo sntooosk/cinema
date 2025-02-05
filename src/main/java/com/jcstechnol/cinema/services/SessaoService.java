@@ -20,44 +20,42 @@ public class SessaoService {
     @Autowired
     private FilmeRepository filmeRepository;
 
-    public void salvarSessao(SessaoDTO sessaoDTO) {
+    public void createSessao(SessaoDTO sessaoDTO) {
         Optional<Filme> filmeOpt = filmeRepository.findById(sessaoDTO.getFilmeId());
         if (filmeOpt.isPresent()) {
             Sessao sessao = new Sessao();
             sessao.setFilme(filmeOpt.get());
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
-            sessao.setPrecoIngresso(sessaoDTO.getPrecoIngresso());
 
             sessaoRepository.save(sessao);
         }
     }
 
-    public Optional<List<Sessao>> listarSessoesPorFilme(Long filmeId) {
+    public Optional<List<Sessao>> getSessaoByFilmeId(Long filmeId) {
         List<Sessao> sessoes = sessaoRepository.findByFilmeId(filmeId);
         return Optional.ofNullable(sessoes.isEmpty() ? null : sessoes);
     }
-    public List<Sessao> listarSessoes() {
+    public List<Sessao> getAllSessao() {
         return sessaoRepository.findAll();
     }
 
-    public Optional<Sessao> obterSessao(Long id) {
+    public Optional<Sessao> getByIdSessao(Long id) {
         return sessaoRepository.findById(id);
     }
 
-    public void atualizarSessao(SessaoDTO sessaoDTO) {
+    public void updateSessao(SessaoDTO sessaoDTO) {
         Optional<Sessao> sessaoOpt = sessaoRepository.findById(sessaoDTO.getId());
         if (sessaoOpt.isPresent()) {
             Sessao sessao = sessaoOpt.get();
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
-            sessao.setPrecoIngresso(sessaoDTO.getPrecoIngresso());
 
             sessaoRepository.save(sessao);
         }
     }
 
-    public void excluirSessao(Long id) {
+    public void deleteSessao(Long id) {
         sessaoRepository.deleteById(id);
     }
 }
