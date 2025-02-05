@@ -23,7 +23,7 @@ public class FilmeController {
 
     @GetMapping("/novo")
     public String showCreateFilmePage() {
-        return "novo-filme";
+        return "filme/novo-filme";
     }
 
     @PostMapping("/novo")
@@ -35,13 +35,13 @@ public class FilmeController {
     @GetMapping("/listar")
     public String listFilmes(Model model) {
         model.addAttribute("filmes", filmeService.listarFilmes());
-        return "listar-filmes";
+        return "filme/listar-filmes";
     }
 
     @GetMapping("/editar/{id}")
     public String showEditFilmePage(@PathVariable Long id, Model model) {
         filmeService.obterFilme(id).ifPresent(filme -> model.addAttribute("filme", filme));
-        return "editar-filme";
+        return "filme/editar-filme";
     }
 
     @PostMapping("/editar")

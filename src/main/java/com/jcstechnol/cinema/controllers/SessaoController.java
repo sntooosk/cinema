@@ -24,7 +24,7 @@ public class SessaoController {
     @GetMapping("/nova")
     public String showCreateSessaoPage(Model model) {
         model.addAttribute("filmes", filmeService.listarFilmes());
-        return "nova-sessao";
+        return "sessao/nova-sessao";
     }
 
     @PostMapping("/nova")
@@ -37,13 +37,13 @@ public class SessaoController {
     public String listSessoes(Model model) {
         List<Sessao> sessoes = sessaoService.listarSessoes();
         model.addAttribute("sessoes", sessoes);
-        return "listar-sessoes";
+        return "sessao/listar-sessoes";
     }
 
     @GetMapping("/editar/{id}")
     public String showEditSessaoPage(@PathVariable Long id, Model model) {
         sessaoService.obterSessao(id).ifPresent(sessao -> model.addAttribute("sessao", sessao));
-        return "editar-sessao";
+        return "sessao/editar-sessao";
     }
 
     @PostMapping("/editar")

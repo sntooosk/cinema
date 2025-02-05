@@ -6,78 +6,65 @@
   <title>Detalhes do Filme</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    body {
+      background: #f8f9fa;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card img {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
     .classificacao {
       font-weight: bold;
-      padding: 5px;
+      padding: 5px 10px;
       border-radius: 5px;
+      color: white;
+      display: inline-block;
     }
-     .classificacao.c-L {
-            background: #00b168;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: white;
-        }
 
-        .classificacao.c-10 {
-            background: #25c3fe;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: white;
-        }
+    .c-L { background: #00b168; }
+    .c-10 { background: #25c3fe; }
+    .c-12 { background: #ffd126; color: black; }
+    .c-14 { background: #fe7725; }
+    .c-16 { background: #ff3838; }
+    .c-18 { background: #3e3e3e; }
+    .c-N { background: #a5a2a2; color: black; }
 
-        .classificacao.c-12 {
-            background: #ffd126;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: black;
-        }
-
-        .classificacao.c-14 {
-            background: #fe7725;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .classificacao.c-16 {
-            background: #ff3838;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .classificacao.c-18 {
-            background: #3e3e3e;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .classificacao.c-N {
-            background: #a5a2a2;
-            padding: 4px 9px;
-            border-radius: 5px;
-            color: black;
-        }
     .video-container {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
-      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
+
     .video-container iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      border-radius: 15px;
     }
   </style>
 </head>
-<body class="bg-light">
+<body>
 
-<div th:replace="~{navbar.html :: navbar}"></div>
+<div th:replace="~{fragment/navbar.html :: navbar}"></div>
 
 <div class="container mt-4">
   <h2 class="text-center mb-4" th:text="${filme.titulo}"></h2>
@@ -86,7 +73,7 @@
     <div class="col-md-4">
       <div class="card">
         <img th:src="@{/filmes/capa/{id}(id=${filme.id})}" class="card-img-top" alt="Capa do filme">
-        <div class="card-body">
+        <div class="card-body text-center">
           <h5 class="card-title" th:text="${filme.titulo}"></h5>
           <p><strong>Diretor:</strong> <span th:text="${filme.diretor}"></span></p>
           <p><strong>Gênero:</strong> <span th:text="${filme.genero}"></span></p>
@@ -111,12 +98,12 @@
             <div class="card-body text-center">
               <h5 class="card-title" th:text="${#temporals.format(sessao.horario, 'dd/MM/yyyy HH:mm')}"></h5>
               <p><strong>Sala:</strong> <span th:text="${sessao.sala}"></span></p>
-              <p><strong>Preço:</strong> <span th:text="${sessao.precoIngresso}"></span></p>
+              <a th:href="@{/home/#/{id}(id=${sessao.id})}" class="btn btn-danger mt-2">Ver Sessao</a>
             </div>
           </div>
         </div>
       </div>
-      <a href="/home" class="btn btn-secondary w-100">Voltar para a lista</a>
+      <a href="/cartaz" class="btn btn-secondary w-100">Voltar para a lista</a>
     </div>
   </div>
 </div>

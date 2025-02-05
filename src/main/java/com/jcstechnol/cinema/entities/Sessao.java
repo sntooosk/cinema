@@ -19,7 +19,6 @@ public class Sessao {
 
     private String sala;
 
-    private Double precoIngresso;
 
     public Long getId() {
         return id;
@@ -51,13 +50,5 @@ public class Sessao {
 
     public void setSala(String sala) {
         this.sala = sala;
-    }
-
-    public Double getPrecoIngresso() {
-        return precoIngresso;
-    }
-
-    public void setPrecoIngresso(Double precoIngresso) {
-        this.precoIngresso = precoIngresso;
     }
 }

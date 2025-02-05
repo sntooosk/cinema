@@ -15,7 +15,6 @@
         <div class="mb-3">
             <label for="filmeId" class="form-label">Filme</label>
             <select id="filmeId" name="filmeId" class="form-control" required>
-                <!-- Popule as opções de filmes a partir do back-end -->
                 <option value="">Selecione um filme</option>
                 <option th:each="filme : ${filmes}" th:value="${filme.id}" th:text="${filme.titulo}"></option>
             </select>
@@ -27,10 +26,6 @@
         <div class="mb-3">
             <label for="sala" class="form-label">Sala</label>
             <input type="text" id="sala" name="sala" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="precoIngresso" class="form-label">Preço do Ingresso</label>
-            <input type="number" id="precoIngresso" name="precoIngresso" class="form-control" step="0.01" required>
         </div>
         <button type="submit" class="btn btn-primary">Criar Sessão</button>
     </form>

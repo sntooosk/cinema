@@ -23,11 +23,6 @@
             <label for="horario" class="form-label">Horário</label>
             <input type="datetime-local" id="horario" name="horario" class="form-control" th:value="${#temporals.format(sessao.horario, 'yyyy-MM-dd''T''HH:mm')}" required>
         </div>
-
-        <div class="mb-3">
-            <label for="precoIngresso" class="form-label">Preço Ingresso</label>
-            <input type="number" id="precoIngresso" name="precoIngresso" class="form-control" th:value="${sessao.precoIngresso}" required>
-        </div>
         <button type="submit" class="btn btn-primary">Atualizar Sessão</button>
     </form>
 </div>

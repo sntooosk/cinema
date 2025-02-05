@@ -18,7 +18,6 @@
             <th>Filme</th>
             <th>Horário</th>
             <th>Sala</th>
-            <th>Preço do Ingresso</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -27,7 +26,6 @@
             <td th:text="${sessao.filme.titulo}"></td>
             <td th:text="${sessao.horario}"></td>
             <td th:text="${sessao.sala}"></td>
-            <td th:text="${sessao.precoIngresso}"></td>
             <td>
                 <a th:href="@{/sessoes/editar/{id}(id=${sessao.id})}" class="btn btn-warning">Editar</a>
                 <a th:href="@{/sessoes/excluir/{id}(id=${sessao.id})}" class="btn btn-danger">Excluir</a>

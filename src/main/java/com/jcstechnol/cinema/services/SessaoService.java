@@ -27,7 +27,6 @@ public class SessaoService {
             sessao.setFilme(filmeOpt.get());
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
-            sessao.setPrecoIngresso(sessaoDTO.getPrecoIngresso());
 
             sessaoRepository.save(sessao);
         }
@@ -51,7 +50,6 @@ public class SessaoService {
             Sessao sessao = sessaoOpt.get();
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
-            sessao.setPrecoIngresso(sessaoDTO.getPrecoIngresso());
 
             sessaoRepository.save(sessao);
         }
