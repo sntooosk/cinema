@@ -1,44 +1,19 @@
 package com.jcstechnol.cinema.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SessaoDTO {
 
     private Long id;
     private Long filmeId;
     private LocalDateTime horario;
     private String sala;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getFilmeId() {
-        return filmeId;
-    }
-
-    public void setFilmeId(Long filmeId) {
-        this.filmeId = filmeId;
-    }
-
-    public LocalDateTime getHorario() {
-        return horario;
-    }
-
-    public void setHorario(LocalDateTime horario) {
-        this.horario = horario;
-    }
-
-    public String getSala() {
-        return sala;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
-    }
-
 }

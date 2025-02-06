@@ -20,13 +20,13 @@ public class CartazController {
 
 
     @GetMapping("/cartaz")
-    public String showHomePage(Model model) {
+    public String pageCartaz(Model model) {
         model.addAttribute("filmes", filmeService.getAllFilme());
         return "cartaz.html";
     }
 
     @GetMapping("/cartaz/info/{id}")
-    public String showFilmeDetails(@PathVariable Long id, Model model) {
+    public String pageCartazInfo(@PathVariable Long id, Model model) {
         filmeService.getByIdFilme(id).ifPresent(filme -> model.addAttribute("filme", filme));
         sessaoService.getSessaoByFilmeId(id).ifPresent(sessoes -> model.addAttribute("sessoes", sessoes));
 
