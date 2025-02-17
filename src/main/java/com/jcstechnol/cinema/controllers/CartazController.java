@@ -43,9 +43,9 @@ public class CartazController {
     @GetMapping("/cartaz/info/poltronas/{id}")
     public String escolherPoltronas(@PathVariable Long id, Model model) {
         Optional<Sessao> sessao = sessaoService.getByIdSessao(id);
-        List<Poltrona> poltronasDisponiveis = poltronaService.buscarPorSessao(id);
+        List<Poltrona> poltronasDisponiveis = poltronaService.findPoltronasBySessao(id);
 
-        model.addAttribute("sessao", sessao.orElse(null));
+        model.addAttribute("sessao" , sessao.orElse(null));
         model.addAttribute("poltronas", poltronasDisponiveis);
 
         return "cartaz_poltronas";

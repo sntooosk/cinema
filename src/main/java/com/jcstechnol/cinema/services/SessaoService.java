@@ -36,7 +36,7 @@ public class SessaoService {
 
             Sessao novaSessao = sessaoRepository.save(sessao);
 
-            criarPoltronasParaSessao(novaSessao);
+            createPoltronasBySessao(novaSessao);
         }
     }
 
@@ -68,7 +68,7 @@ public class SessaoService {
         sessaoRepository.deleteById(id);
     }
 
-    private void criarPoltronasParaSessao(Sessao sessao) {
+    private void createPoltronasBySessao(Sessao sessao) {
         List<Poltrona> poltronas = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
             Poltrona poltrona = new Poltrona();

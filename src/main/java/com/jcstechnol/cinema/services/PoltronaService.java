@@ -13,21 +13,19 @@ public class PoltronaService {
     @Autowired
     private PoltronaRepository poltronaRepository;
 
-    public List<Poltrona> buscarPorSessao(Long sessaoId) {
+    public List<Poltrona> findPoltronasBySessao(Long sessaoId) {
         return poltronaRepository.findBySessaoId(sessaoId);
     }
 
-    public void atualizar(Long id, Poltrona poltrona) {
+    public void update(Long id, Poltrona poltrona) {
         Optional<Poltrona> poltronaExistente = poltronaRepository.findById(id);
 
         if (poltronaExistente.isPresent()) {
-            Poltrona poltronaParaAtualizar = poltronaExistente.get();
-            poltronaParaAtualizar.setNumero(poltrona.getNumero()); // exemplo de como copiar dados
-            poltronaParaAtualizar.setStatus(poltrona.getStatus());
-            poltronaParaAtualizar.setSessao(poltrona.getSessao());
-            poltronaRepository.save(poltronaParaAtualizar);
-        } else {
-            throw new RuntimeException("Poltrona não encontrada para o id: " + id);
+            Poltrona poltronaUpdate = poltronaExistente.get();
+            poltronaUpdate.setNumero(poltrona.getNumero());
+            poltronaUpdate.setStatus(poltrona.getStatus());
+            poltronaUpdate.setSessao(poltrona.getSessao());
+            poltronaRepository.save(poltronaUpdate);
         }
     }
 }

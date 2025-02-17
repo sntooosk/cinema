@@ -16,7 +16,7 @@ public class PoltronaController {
 
     @PostMapping("/atualizar/{id}")
     public String atualizarPoltrona(@PathVariable Long id, @ModelAttribute Poltrona poltrona) {
-        poltronaService.atualizar(id, poltrona);
+        poltronaService.update(id, poltrona);
         return "redirect:/poltronas";
     }
 }
