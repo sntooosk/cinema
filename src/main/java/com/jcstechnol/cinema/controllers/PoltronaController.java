@@ -2,7 +2,6 @@ package com.jcstechnol.cinema.controllers;
 
 import com.jcstechnol.cinema.entities.Poltrona;
 import com.jcstechnol.cinema.services.PoltronaService;
-import com.jcstechnol.cinema.services.SessaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/poltronas")
 public class PoltronaController {
 
-    @Autowired
-    private SessaoService sessaoService;
     @Autowired
     private PoltronaService poltronaService;
 
