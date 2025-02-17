@@ -2,12 +2,15 @@ package com.jcstechnol.cinema.services;
 
 import com.jcstechnol.cinema.dtos.SessaoDTO;
 import com.jcstechnol.cinema.entities.Filme;
+import com.jcstechnol.cinema.entities.Poltrona;
 import com.jcstechnol.cinema.entities.Sessao;
+import com.jcstechnol.cinema.repositories.PoltronaRepository;
 import com.jcstechnol.cinema.repositories.SessaoRepository;
 import com.jcstechnol.cinema.repositories.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +23,11 @@ public class SessaoService {
     @Autowired
     private FilmeRepository filmeRepository;
 
+    @Autowired
+    private PoltronaRepository poltronaRepository;
+
     public void createSessao(SessaoDTO sessaoDTO) {
+        // Busca o filme com base no ID
         Optional<Filme> filmeOpt = filmeRepository.findById(sessaoDTO.getFilmeId());
         if (filmeOpt.isPresent()) {
             Sessao sessao = new Sessao();
@@ -28,7 +35,11 @@ public class SessaoService {
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
 
-            sessaoRepository.save(sessao);
+            // Salva a sessão no banco
+            Sessao novaSessao = sessaoRepository.save(sessao);
+
+            // Cria as 30 poltronas associadas à nova sessão
+            criarPoltronasParaSessao(novaSessao);
         }
     }
 
@@ -36,6 +47,7 @@ public class SessaoService {
         List<Sessao> sessoes = sessaoRepository.findByFilmeId(filmeId);
         return Optional.ofNullable(sessoes.isEmpty() ? null : sessoes);
     }
+
     public List<Sessao> getAllSessao() {
         return sessaoRepository.findAll();
     }
@@ -57,5 +69,18 @@ public class SessaoService {
 
     public void deleteSessao(Long id) {
         sessaoRepository.deleteById(id);
+    }
+
+    private void criarPoltronasParaSessao(Sessao sessao) {
+        List<Poltrona> poltronas = new ArrayList<>();
+        for (int i = 1; i <= 30; i++) {
+            Poltrona poltrona = new Poltrona();
+            poltrona.setSessao(sessao);
+            poltrona.setNumero(i);
+            poltrona.setStatus(true);
+            poltronas.add(poltrona);
+        }
+        // Salva todas as poltronas de uma vez
+        poltronaRepository.saveAll(poltronas);
     }
 }

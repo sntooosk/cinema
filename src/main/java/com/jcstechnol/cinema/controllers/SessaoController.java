@@ -23,6 +23,7 @@ public class SessaoController {
     @Autowired
     private FilmeService filmeService;
 
+
     @GetMapping("/nova")
     public String pageNewSessao(Model model) {
         model.addAttribute("filmes", filmeService.getAllFilme());

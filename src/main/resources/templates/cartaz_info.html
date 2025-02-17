@@ -98,7 +98,7 @@
             <div class="card-body text-center">
               <h5 class="card-title" th:text="${#temporals.format(sessao.horario, 'dd/MM/yyyy HH:mm')}"></h5>
               <p><strong>Sala:</strong> <span th:text="${sessao.sala}"></span></p>
-              <a th:href="@{/home/#/{id}(id=${sessao.id})}" class="btn btn-danger mt-2">Ver Sessao</a>
+              <a th:href="@{/cartaz/info/poltronas/{id}(id=${sessao.id})}" class="btn btn-danger mt-2">Ver Sessao</a>
             </div>
           </div>
         </div>
