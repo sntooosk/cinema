@@ -27,7 +27,6 @@ public class SessaoService {
     private PoltronaRepository poltronaRepository;
 
     public void createSessao(SessaoDTO sessaoDTO) {
-        // Busca o filme com base no ID
         Optional<Filme> filmeOpt = filmeRepository.findById(sessaoDTO.getFilmeId());
         if (filmeOpt.isPresent()) {
             Sessao sessao = new Sessao();
@@ -35,10 +34,8 @@ public class SessaoService {
             sessao.setHorario(sessaoDTO.getHorario());
             sessao.setSala(sessaoDTO.getSala());
 
-            // Salva a sessão no banco
             Sessao novaSessao = sessaoRepository.save(sessao);
 
-            // Cria as 30 poltronas associadas à nova sessão
             criarPoltronasParaSessao(novaSessao);
         }
     }
@@ -80,7 +77,6 @@ public class SessaoService {
             poltrona.setStatus(true);
             poltronas.add(poltrona);
         }
-        // Salva todas as poltronas de uma vez
         poltronaRepository.saveAll(poltronas);
     }
 }
